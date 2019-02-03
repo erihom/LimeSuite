@@ -70,16 +70,16 @@ public:
 
     int Open(const std::string &serial, int vid, int pid);
     void Close();
-    bool IsOpen();
+    bool IsOpen() override;
     int GetOpenedIndex();
 
     int Write(const unsigned char *buffer, int length, int timeout_ms = 100) override;
     int Read(unsigned char *buffer, int length, int timeout_ms = 100) override;
 
     int ProgramWrite(const char *data_src, size_t length, int prog_mode, int device, ProgrammingCallback callback) override;
-    
+
     DeviceInfo GetDeviceInfo(void)override;
-    
+
     int GPIOWrite(const uint8_t *buffer, size_t bufLength) override;
     int GPIORead(uint8_t *buffer, size_t bufLength) override;
     int GPIODirWrite(const uint8_t *buffer, size_t bufLength) override;
@@ -97,11 +97,11 @@ protected:
     bool WaitForSending(int contextHandle, uint32_t timeout_ms) override;
     int FinishDataSending(const char* buffer, uint32_t length, int contextHandle) override;
     void AbortSending(int ep) override;
-    
+
     int ResetStreamBuffers() override;
 
-    eConnectionType GetType(void) {return USB_PORT;}
-    
+    eConnectionType GetType(void) override {return USB_PORT;}
+
     static const int USB_MAX_CONTEXTS = 16; //maximum number of contexts for asynchronous transfers
 
     USBTransferContext contexts[USB_MAX_CONTEXTS];

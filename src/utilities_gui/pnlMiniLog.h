@@ -23,7 +23,7 @@ public:
     void onLogLvlChange(wxCommandEvent& event)override;
     //// end generated class members
     void HandleMessage(wxCommandEvent &event);
-    void OnUpdateGUI(wxUpdateUIEvent& event);
+    void OnUpdateGUI(wxUpdateUIEvent& event) override;
 
 private:
     wxTextAttr mDefaultStyle;

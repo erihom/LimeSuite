@@ -90,7 +90,7 @@ public:
 
     int Open(const std::string &vidpid, const std::string &serial, const unsigned index);
     void Close();
-    bool IsOpen();
+    bool IsOpen() override;
     int GetOpenedIndex();
 
     int Write(const unsigned char* buffer, int length, int timeout_ms = 100) override;
@@ -99,10 +99,10 @@ public:
     //hooks to update FPGA plls when baseband interface data rate is changed
     int ProgramWrite(const char *buffer, const size_t length, const int programmingMode, const int device, ProgrammingCallback callback) override;
 protected:
-    int GetBuffersCount() const;
-    int CheckStreamSize(int size)const;
-    int SendData(const char* buffer, int length, int epIndex = 0, int timeout = 100)override;
-    int ReceiveData(char* buffer, int length, int epIndex = 0, int timeout = 100)override;
+    int GetBuffersCount() const override;
+    int CheckStreamSize(int size)const override;
+    int SendData(const char* buffer, int length, int epIndex = 0, int timeout = 100) override;
+    int ReceiveData(char* buffer, int length, int epIndex = 0, int timeout = 100) override;
 
     int BeginDataReading(char* buffer, uint32_t length, int ep) override;
     bool WaitForReading(int contextHandle, unsigned int timeout_ms) override;
@@ -115,10 +115,10 @@ protected:
     void AbortSending(int ep) override;
 
     int ResetStreamBuffers() override;
-    eConnectionType GetType(void) {return USB_PORT;}
-    
+    eConnectionType GetType(void) override {return USB_PORT;}
+
     static const int USB_MAX_CONTEXTS = 16; //maximum number of contexts for asynchronous transfers
-    
+
     USBTransferContext contexts[USB_MAX_CONTEXTS];
     USBTransferContext contextsToSend[USB_MAX_CONTEXTS];
 

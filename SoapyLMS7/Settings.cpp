@@ -114,7 +114,7 @@ SoapySDR::Kwargs SoapyLMS7::getHardwareInfo(void) const
     info["gatewareVersion"] = std::string(devinfo->gatewareVersion);
     if (devinfo->boardSerialNumber!= unsigned(-1))
     {
-        char buff[64]; sprintf(buff, "0x%lx", devinfo->boardSerialNumber);
+        char buff[64]; sprintf(buff, "0x%llx", devinfo->boardSerialNumber);
         info["boardSerialNumber"] = buff;
     }
     return info;

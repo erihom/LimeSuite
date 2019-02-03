@@ -653,7 +653,7 @@ int MCU_BD::Program_MCU(const uint8_t* buffer, const IConnection::MCU_PROG_MODE 
     }while( (!programmed) && (t2-t1)<timeout);
 #ifndef NDEBUG
     auto timeEnd = std::chrono::high_resolution_clock::now();
-    printf("\nMCU Programming finished, %li ms\n",
+    printf("\nMCU Programming finished, %lli ms\n",
             std::chrono::duration_cast<std::chrono::milliseconds>
             (timeEnd-timeStart).count());
 #endif

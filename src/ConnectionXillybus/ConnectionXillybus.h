@@ -31,7 +31,7 @@ public:
 
     int Open(const unsigned index);
     void Close();
-    bool IsOpen();
+    bool IsOpen() override;
     int GetOpenedIndex();
 
     int Write(const unsigned char *buffer, int length, int timeout_ms = 100) override;
@@ -50,12 +50,12 @@ protected:
     int BeginDataReading(char* buffer, uint32_t length, int ep) override;
     bool WaitForReading(int contextHandle, unsigned int timeout_ms) override;
     int FinishDataReading(char* buffer, uint32_t length, int contextHandle) override;
-    void AbortReading(int epIndex);
+    void AbortReading(int epIndex) override;
 
     int BeginDataSending(const char* buffer, uint32_t length, int ep) override;
     bool WaitForSending(int contextHandle, uint32_t timeout_ms) override;
     int FinishDataSending(const char* buffer, uint32_t length, int contextHandle) override;
-    void AbortSending(int epIndex);
+    void AbortSending(int epIndex) override;
 private:
     friend class ConnectionXillybusEntry;
     static const int MAX_EP_CNT = 3;
@@ -69,7 +69,7 @@ private:
     };
 
     static const std::vector<EPConfig> deviceConfigs;
-    eConnectionType GetType(void) {return PCIE_PORT;}
+    eConnectionType GetType(void) override {return PCIE_PORT;}
 
     std::string m_hardwareName;
     int m_hardwareVer;

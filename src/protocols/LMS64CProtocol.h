@@ -26,25 +26,25 @@ public:
 
     virtual ~LMS64CProtocol(void);
 
-    virtual DeviceInfo GetDeviceInfo(void);
+    virtual DeviceInfo GetDeviceInfo(void) override;
 
     //! DeviceReset implemented by LMS64C
-    int DeviceReset(int ind=0);
+    int DeviceReset(int ind = 0) override;
 
     //! TransactSPI implemented by LMS64C
-    int TransactSPI(const int addr, const uint32_t *writeData, uint32_t *readData, const size_t size)override;
+    int TransactSPI(const int addr, const uint32_t *writeData, uint32_t *readData, const size_t size) override;
 
     //! WriteI2C implemented by LMS64C
-    int WriteI2C(const int addr, const std::string &data);
+    int WriteI2C(const int addr, const std::string &data) override;
 
     //! ReadI2C implemented by LMS64C
-    int ReadI2C(const int addr, const size_t numBytes, std::string &data);
+    int ReadI2C(const int addr, const size_t numBytes, std::string &data) override;
 
     //! WriteRegisters (BRDSPI) implemented by LMS64C
-    int WriteRegisters(const uint32_t *addrs, const uint32_t *data, const size_t size);
+    int WriteRegisters(const uint32_t *addrs, const uint32_t *data, const size_t size) override;
 
     //! ReadRegisters (BRDSPI) implemented by LMS64C
-    int ReadRegisters(const uint32_t *addrs, uint32_t *data, const size_t size);
+    int ReadRegisters(const uint32_t *addrs, uint32_t *data, const size_t size) override;
 
     /// Supported connection types.
     enum eConnectionType
@@ -172,7 +172,7 @@ public:
         PROGRAM_WRITE_TARGET_COUNT
     };
 
-    virtual int ProgramWrite(const char *buffer, const size_t length, const int programmingMode, const int device, ProgrammingCallback callback = nullptr);
+    virtual int ProgramWrite(const char *buffer, const size_t length, const int programmingMode, const int device, ProgrammingCallback callback = nullptr) override;
 
     virtual int CustomParameterRead(const uint8_t *ids, double *values, const size_t count, std::string* units) override;
     virtual int CustomParameterWrite(const uint8_t *ids, const double *values, const size_t count, const std::string& units) override;

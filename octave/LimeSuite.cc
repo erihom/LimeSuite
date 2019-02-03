@@ -440,7 +440,7 @@ DEFUN_DLD (LimeLoopWFMStart, args, ,
     LMS_EnableTxWFM(lmsDev, 0, true);
     for(int i=0; i<chCount; ++i)
         delete wfmBuffers[i];
-    delete wfmBuffers;
+    delete[] wfmBuffers;
     WFMrunning = true;
     return octave_value_list();
 }

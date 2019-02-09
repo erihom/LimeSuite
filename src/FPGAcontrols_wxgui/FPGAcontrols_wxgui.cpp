@@ -219,7 +219,7 @@ void FPGAcontrols_wxgui::OnbtnPlayWFMClick(wxCommandEvent& event)
 void FPGAcontrols_wxgui::OnbtnStopWFMClick(wxCommandEvent& event)
 {
     LMS_EnableTxWFM(lmsControl, cmbDevice->GetSelection()*2, false);
-};
+}
 
 int FPGAcontrols_wxgui::UploadFile(const wxString &filename)
 {

@@ -183,7 +183,6 @@ DEFUN_DLD (LimeStartStreaming, args, nargout,
     bool tx[maxChCnt] = {false};
     bool rx[maxChCnt] = {false};
     int fifoSize = 4*1024*1024; //4MS
-    int channels = 1;
 
     if ((nargin > 2))
     {
@@ -268,7 +267,7 @@ DEFUN_DLD (LimeStopStreaming, args, nargout,
         octave_stdout << "LimeSuite not initialized" << endl;
         return octave_value(-1);
     }
-    int nargin = args.length();
+
     octave_stdout << "StopStreaming" << endl;
     StopStream();
     return octave_value_list();
@@ -349,7 +348,6 @@ CH parameter is optional, valid values are 0 and 1")
     }
 
     int nargin = args.length ();
-    int check=0;
     if (nargin != 2 && nargin != 1)
     {
         print_usage ();
@@ -406,7 +404,6 @@ DEFUN_DLD (LimeLoopWFMStart, args, ,
         return octave_value(-1);
     }
     int nargin = args.length ();
-    int check=0;
     if (nargin != 2 && nargin != 1)
     {
         print_usage ();
@@ -414,12 +411,10 @@ DEFUN_DLD (LimeLoopWFMStart, args, ,
     }
 
     const int chCount = nargin;
-    const int timeout_ms = 1000;
 
     ComplexRowVector    iqdata=args(0).complex_row_vector_value();
     dim_vector          iqdataSize=iqdata.dims();
     int samplesCount = iqdataSize(0) > iqdataSize(1) ? iqdataSize(0) : iqdataSize(1);
-    int wfmLength = samplesCount;
 
     complex16_t **wfmBuffers = new complex16_t*[chCount];
     for(int i=0; i<chCount; ++i)
